@@ -26,7 +26,7 @@ def index():
       try:
         global model, kdtree
         print kdtree
-        convergences = utils.get_convergence(word1, word2, model[0], model[1], kdtree)
+        convergences = utils.get_convergence([word1, word2], model[0], model[1], kdtree)
         print convergences
         g.word1 = word1
         g.word2 = word2

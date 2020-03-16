@@ -68,26 +68,24 @@ def find_distances(w, mat=None, rownames=None, distfunc=cosine):
     return sorted(dists, key=itemgetter(1), reverse=False)
     
 
-def midpoint(word1=None, word2=None, mat=None, rownames=None):
+def midpoint(words, mat=None, rownames=None):
     """
     Gets the midpoint between two words as a vec.
 
     Args:
-        word1: Word 1
-        word2: Word 2
+        words: Array of str
         mat: Distributional matrix
         rownames: The rownames (labels of matrix rows)
 
     Return:
         Returns the midpoint of two words as a vec.
     """
-    if word1 not in rownames:
-        raise ValueError('%s is not in this VSM' % word1)
-    if word2 not in rownames:
-        raise ValueError('%s is not in this VSM' % word2)
-    w1 = mat[rownames.index(word1)]
-    w2 = mat[rownames.index(word2)]
-    return (w1 + w2) / 2.0
+    total = np.zeros(np.shape(mat)[1])
+    for word in words:
+        if word not in rownames:
+            raise ValueError('%s is not in this VSM' % word)
+        total += mat[rownames.index(word)]
+    return total / float(max(len(words), 1))
 
 
 def is_equivalent_word(word1=None, word2=None):
@@ -122,13 +120,12 @@ def is_equivalent_word(word1=None, word2=None):
 #         i += 1
 #     return convergences
 
-def get_convergence(word1=None, word2=None, mat=None, rownames=None, kdtree=None, k=10):
+def get_convergence(words=[], mat=None, rownames=None, kdtree=None, k=10):
     """
     Shows top k closest convergence guesses.
 
     Args:
-        word1: Word 1
-        word2: Word 2
+        words: Array of str
         mat: Distributional matrix
         rownames: The rownames (labels of matrix rows)
         kdtree: Kd tree
@@ -137,7 +134,7 @@ def get_convergence(word1=None, word2=None, mat=None, rownames=None, kdtree=None
     Return:
         Returns a list of the k best convergences as determined by using the kdtree
     """
-    w_mid = midpoint(word1, word2, mat, rownames)
+    w_mid = midpoint(words, mat, rownames)
     dists, pt_idx = kdtree.query([w_mid], k*2)
     dists = dists.flatten()
     pt_idx = pt_idx.flatten()
@@ -146,10 +143,9 @@ def get_convergence(word1=None, word2=None, mat=None, rownames=None, kdtree=None
     convergences = []
     i = 0
     while len(convergences) < k:
-        word = rownames[pt_idx[i]]
+        converged_word = rownames[pt_idx[i]]
         dist = dists[i]
-        if not is_equivalent_word(word, word1) and \
-           not is_equivalent_word(word, word2):
-            convergences += [(word, dist)]
+        if not any(is_equivalent_word(converged_word, w) for w in words):
+            convergences += [(converged_word, dist)]
         i += 1
     return convergences
