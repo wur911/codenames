@@ -1,7 +1,6 @@
 # Convergence game
 
 ## TODO LIST
-*  Move onto github
 *  Fix up file uploading
 *  extend to allow multiple words
    *  Extend algorithm code
