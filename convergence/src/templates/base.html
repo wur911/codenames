@@ -1,0 +1,20 @@
+<!doctype html>
+<head>
+  {% block head %}{% endblock %}
+</head>
+<title>{% block title %}{% endblock %} - Convergence</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>Convergence</h1>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% block topmenu %}{% endblock %}
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+  {% block botmenu %}{% endblock %}
+</section>

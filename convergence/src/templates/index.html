@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <script type='text/javascript'>
+    function addInputField() {
+
+    }
+    function removeInputField() {
+
+    }
+  </script>
+{% endblock %}
+
+{% block header %}
+  <h1>{% block title %}Play convergence{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <div>
+      <span><a href="/import">Import word embeddings</a></span>
+    </div>
+    {% if session['src_filename'] %}
+      <span>Using {{ session['src_filename'] }}</span>
+    {% endif %}
+  </div>
+
+  <div>
+    <form name="words" method="post">
+      <div>
+        <label for="">Word 1</label>
+        <input type="text" name="word1">
+      </div>
+      <div>
+        <label for="">Word 2</label>
+        <input type="text" name="word2">
+      </div>
+      <div>
+        <input type="submit">
+      </div>
+    </form>
+  </div>
+
+  <!-- TODO: debug mode -->
+  <div>
+    {% if g.word1 %}
+      <span>Word 1: {{ g.word1 }}</span>
+    {% endif %}
+  </div>
+  <div>
+    {% if g.word2 %}
+      <span>Word 2: {{ g.word2 }}</span>
+    {% endif %}
+  </div>
+  <div>
+    {% if g.converged_word %}
+      <span>Converged word is: {{ g.converged_word }}</span>
+    {% endif %}
+  </div>
+{% endblock %}

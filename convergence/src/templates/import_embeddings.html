@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Import word embedding data{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <div>
+  <form name="wordembed" method="post">
+    <label for="src_filename">Filename</label>
+    <input type="file" name="src_filename" required>
+    <br>
+    <label for="delimiter">Delimiter (default: ',')</label>
+    <input type="text" name="delimiter">
+    <br>
+    <input type="submit">
+  </form>
+  </div>
+  <div>
+    {% if session['src_filename'] %}
+    <span>Successfully uploaded {{ session['src_filename'] }}</span>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block botmenu %}
+<a href="/">Back</a>
+{% endblock %}
