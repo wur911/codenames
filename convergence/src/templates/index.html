@@ -20,9 +20,16 @@
     <div>
       <span><a href="/import">Import word embeddings</a></span>
     </div>
+    <div>
     {% if session['src_filename'] %}
       <span>Using {{ session['src_filename'] }}</span>
     {% endif %}
+    </div>
+    <div>
+    {% if session['num_words'] %}
+      <span>Dictionary has{{ session['num_words'] }} words</span>
+    {% endif %}
+    </div>
   </div>
 
   <div>

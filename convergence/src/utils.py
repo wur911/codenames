@@ -94,33 +94,32 @@ def is_equivalent_word(word1=None, word2=None):
     return False
 
 
-# def get_convergence(word1=None, word2=None, mat=None, rownames=None, distfunc=cosine, k=10):
-#     """
-#     Shows top k closest convergence guesses.
-# 
-#     Args:
-#         word1: Word 1
-#         word2: Word 2
-#         mat: Distributional matrix
-#         rownames: The rownames (labels of matrix rows)
-#         distfunc: Distance function
-#         k: Number of words to give
-# 
-#     Return:
-#         Returns a list of the k best convergences as determined by distfunc
-#     """
-#     w_mid = midpoint(word1, word2, mat, rownames)
-#     dists = find_distances(w_mid, mat, rownames, distfunc)
-#     convergences = []
-#     i = 0
-#     while len(convergences) < k:
-#         if not is_equivalent_word(dists[i][0], word1) and \
-#            not is_equivalent_word(dists[i][0], word2):
-#             convergences += [(dists[i])]
-#         i += 1
-#     return convergences
+def get_convergence(words=[], mat=None, rownames=None, distfunc=cosine, k=10):
+    """
+    Shows top k closest convergence guesses.
 
-def get_convergence(words=[], mat=None, rownames=None, kdtree=None, k=10):
+    Args:
+        words: Array of str
+        mat: Distributional matrix
+        rownames: The rownames (labels of matrix rows)
+        distfunc: Distance function
+        k: Number of words to give
+
+    Return:
+        Returns a list of the k best convergences as determined by distfunc
+    """
+    w_mid = midpoint(words, mat, rownames)
+    dists = find_distances(w_mid, mat, rownames, distfunc)
+    convergences = []
+    i = 0
+    while len(convergences) < k:
+        converged_word = dists[i][0]
+        if not any(is_equivalent_word(converged_word, w) for w in words):
+            convergences += [(dists[i])]
+        i += 1
+    return convergences
+
+def get_convergence_kdtree(words=[], mat=None, rownames=None, kdtree=None, k=10):
     """
     Shows top k closest convergence guesses.
 

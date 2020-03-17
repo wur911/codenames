@@ -1,14 +1,10 @@
 # Convergence game
 
 ## TODO LIST
-*  Use cosine similarity iterate over english dict
-*  Find smaller vocab (~100k words)
 *  Fix up file uploading
-*  extend to allow multiple words
-   *  Extend algorithm code
-   *  Extend UI
 *  Move word embedding upload to admin privileges
 *  fix UI
+*  Kd tree with cosine similarity?
 
 ## DONE
 *  Get word embeddings
@@ -16,6 +12,11 @@
 *  Eliminate duplicate words
 *  Set up rudimentary UI using flask
 *  Moved to use kd tree
+*  extend to allow multiple words
+   *  Extend algorithm code
+   *  Extend UI
+*  Use cosine similarity iterate over english dict
+*  Find smaller vocab (~100k words)
 
 ### Word embeddings
 
