@@ -19,17 +19,19 @@ def index():
   if request.method == 'POST':
     word1 = request.form['word1']
     word2 = request.form['word2']
-    print word1, word2
+    word3 = request.form['word3']
+    print word1, word2, word3
     if not session['src_filename']:
       flash('No word embeddings found! Please import word embeddings file.')
     else:
       try:
         global model, kdtree
         print kdtree
-        convergences = utils.get_convergence([word1, word2], model[0], model[1], kdtree)
+        convergences = utils.get_convergence([word1, word2, word3], model[0], model[1], kdtree)
         print convergences
         g.word1 = word1
         g.word2 = word2
+        g.word3 = word3
         g.converged_word = convergences[0][0]
       except ValueError as err:
         print err

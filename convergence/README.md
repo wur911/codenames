@@ -1,6 +1,8 @@
 # Convergence game
 
 ## TODO LIST
+*  Use cosine similarity iterate over english dict
+*  Find smaller vocab (~100k words)
 *  Fix up file uploading
 *  extend to allow multiple words
    *  Extend algorithm code

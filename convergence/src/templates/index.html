@@ -36,6 +36,10 @@
         <input type="text" name="word2">
       </div>
       <div>
+        <label for="">Word 3</label>
+        <input type="text" name="word3">
+      </div>
+      <div>
         <input type="submit">
       </div>
     </form>
@@ -50,6 +54,11 @@
   <div>
     {% if g.word2 %}
       <span>Word 2: {{ g.word2 }}</span>
+    {% endif %}
+  </div>
+  <div>
+    {% if g.word3 %}
+      <span>Word 3: {{ g.word3 }}</span>
     {% endif %}
   </div>
   <div>
