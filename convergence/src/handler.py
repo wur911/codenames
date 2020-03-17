@@ -11,6 +11,7 @@ from . import fileutils
 from . import utils
 
 bp = Blueprint('handler', __name__, url_prefix='/')
+# TODO: fix up global vars
 model = None
 kdtree = None
 
@@ -45,6 +46,8 @@ def index():
 def import_enbedding():
   # TODO: Fix up clear
   session.clear()
+  model = None
+  kdtree = None
   # TODO: allow input vocab
   vocab_filename = "data/vocab.txt"
   if request.method == 'POST':

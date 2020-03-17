@@ -31,6 +31,9 @@ For n=2 -> midpoint
 
 *   Center of mass / centroid = mean of coordinates = minimize squared distance
 *   Geometric media = minimize distance
+*   minimize avg distance
+*   minimize avg square distance
+*   minimize max distance
 
 ### Find nearest point to midpoint
 

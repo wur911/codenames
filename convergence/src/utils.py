@@ -94,7 +94,39 @@ def is_equivalent_word(word1=None, word2=None):
     return False
 
 
+def get_avg_dist(v, other_vs=[], distfunc=cosine):
+    return sum(distfunc(v, x) / float(len(other_vs)) for x in other_vs)
+
+
 def get_convergence(words=[], mat=None, rownames=None, distfunc=cosine, k=10):
+    """
+    Shows top k closest convergence guesses.
+
+    Args:
+        words: Array of str
+        mat: Distributional matrix
+        rownames: The rownames (labels of matrix rows)
+        distfunc: Distance function
+        k: Number of words to give
+
+    Return:
+        Returns a list of the k best convergences as determined by distfunc
+    """
+    if any(word not in rownames for word in words):
+        raise ValueError('%s is not in this VSM' % word)
+    word_vectors = [mat[rownames.index(x)] for x in words]
+    dists = [(candidate_w, get_avg_dist(candidate_v, word_vectors, distfunc)) for candidate_w, candidate_v in zip(rownames, mat)]
+    dists = sorted(dists, key=itemgetter(1), reverse=False)
+    convergences = []
+    i = 0
+    while len(convergences) < k:
+        converged_word = dists[i][0]
+        if not any(is_equivalent_word(converged_word, w) for w in words):
+            convergences += [(dists[i])]
+        i += 1
+    return convergences
+
+def get_convergence_midpoint(words=[], mat=None, rownames=None, distfunc=cosine, k=10):
     """
     Shows top k closest convergence guesses.
 
