@@ -1,5 +1,7 @@
 # Codenames and Convergence player
 
-An AI to play the popular board game Codenames (designed by Vlaada Chvátil).
+A multiplayer implementation of the popular board game Codenames (designed by Vlaada Chvátil).
+
+Also an AI to play as spymaster.
 
 TODO(raymondwu):

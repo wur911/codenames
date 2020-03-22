@@ -31,7 +31,8 @@ def index():
               # global kdtree
               # print kdtree
               # convergences = utils.get_convergence_kdtree([word1, word2, word3], model[0], model[1], kdtree)
-              convergences = utils.get_convergence([word1, word2, word3], model[0], model[1])
+              convergences = utils.get_convergence_midpoint([word1, word2, word3], model[0], model[1])
+              # convergences = utils.get_convergence([word1, word2, word3], model[0], model[1])
               print convergences
               g.word1 = word1
               g.word2 = word2
